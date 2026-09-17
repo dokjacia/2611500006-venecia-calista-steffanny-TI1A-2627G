@@ -43,8 +43,7 @@ Inti: HTTP response merupakan respons yang dikirim peladen kepada klien setelah 
 diproses.
 
 4. HTML, CSS, JavaScript, PHP, MySQL :
-- HTML
-HTML (HyperText Markup Language) digunakan untuk menyusun struktur dan konten halaman
+- HTML (HyperText Markup Language) digunakan untuk menyusun struktur dan konten halaman
 web. HTML digunakan untuk membentuk bagian-bagian halaman, misalnya:
 • judul;
 • paragraf;
@@ -57,8 +56,7 @@ Dalam hubungan antarteknologi web, HTML dapat dipahami sebagai struktur dasar ha
 akan ditampilkan oleh browser.
 Inti:
 HTML digunakan untuk menyusun struktur dan konten halaman web.
-- CSS
-CSS (Cascading Style Sheets) digunakan untuk mengatur tampilan dan tata letak halaman web.
+- CSS (Cascading Style Sheets) digunakan untuk mengatur tampilan dan tata letak halaman web.
 CSS dapat digunakan untuk mengatur, antara lain:
 • warna;
 • ukuran;
@@ -81,8 +79,7 @@ Dalam ruang lingkup mata kuliah ini, JavaScript digunakan terutama pada browser 
 • memberikan umpan balik interaktif; dan
 • melakukan validasi formulir pada sisi klien.
 Inti : JavaScript digunakan untuk memberikan interaksi dan perilaku pada sisi klien.
-- PHP
-PHP digunakan sebagai bahasa pemrograman pada sisi peladen.
+- PHP digunakan sebagai bahasa pemrograman pada sisi peladen.
 PHP dapat digunakan untuk:
 • menerima data dari pengguna;
 • menjalankan logika aplikasi;
@@ -94,8 +91,7 @@ Berbeda dengan JavaScript yang pada ruang lingkup mata kuliah ini digunakan teru
 klien, PHP diproses pada sisi peladen.
 Inti:
 PHP digunakan untuk melakukan pemrosesan dan logika aplikasi pada sisi peladen.
-- MySQL
-MySQL digunakan untuk menyimpan dan mengelola data aplikasi secara terstruktur.
+- MySQL digunakan untuk menyimpan dan mengelola data aplikasi secara terstruktur.
 Contoh data yang dapat dikelola antara lain:
 • data mahasiswa;
 • data pengguna;
