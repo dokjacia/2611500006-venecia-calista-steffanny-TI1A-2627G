@@ -25,4 +25,4 @@ elemen semantik, teks, daftar, tautan, dan gambar.
 - Perbaikan yang dilakukan: [mengubah format file foto,dan nama file fotonyanya yang berada di img src]
 - Hasil validasi akhir: [tampilan sudah seperti yang diperlukan]
 ## GitHub Pages
-URL: [Buka halaman profil Venecia](https://dokjacia.github.io/2611500006-venecia-calista-steffanny-TI1A-2627G/Pertemuan%2002/)
+URL: [Buka halaman profil Venecia](https://dokjacia.github.io/2611500006-venecia-calista-steffanny-TI1A-2627G/pertemuan-02/)
