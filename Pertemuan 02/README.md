@@ -1,9 +1,3 @@
-# Pertemuan 2
-pertemuan - 02/
-├── index.html
-├── emmet.html
-├── taklengkap.html
-├── 
 # Pertemuan 2 - HTML5 Dasar dan Struktur Semantik
 ## Tujuan
 Membangun halaman profil sederhana menggunakan struktur
