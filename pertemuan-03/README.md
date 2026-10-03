@@ -33,4 +33,4 @@
 
 ## GitHub Pages
 
-URL: [tempel URL GitHub Pages Pertemuan 3]
+URL: [https://dokjacia.github.io/2611500006-venecia-calista-steffanny-TI1A-2627G/pertemuan-03/]
