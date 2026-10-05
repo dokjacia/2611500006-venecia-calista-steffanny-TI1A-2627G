@@ -19,6 +19,11 @@ Header h1 {
     margin: 0 0 16px;
     font-size: 28px;
 }
+nav ul {
+    display: flex;
+    flex-direction: column;
+}
+
 section {
     width: 100%; 
 }
