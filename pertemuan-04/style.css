@@ -22,10 +22,26 @@ Header h1 {
 nav ul {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
-
+nav a { 
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
 section {
     width: 100%; 
+    
+}
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 }
  #home {
 background-color: #ffffff;
@@ -112,6 +128,7 @@ margin: 0;
             padding: 20px;
             margin: 0;
             font-family: Arial, sans-serif; 
+            grid-column: 1 / -1;
         }
         #contact h2 {
             color: #003366;
