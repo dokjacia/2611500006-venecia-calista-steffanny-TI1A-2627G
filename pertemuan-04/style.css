@@ -7,7 +7,7 @@ body {
    color: #111827;
    background-color: #eef2f7;
 }
-/* Header*/
+/* Header */
 header {
     background-color: #003366;
     color: #ffffff;
@@ -15,7 +15,7 @@ header {
     margin-bottom: 20px;
     border-bottom: 1px solid #00264d;
 }
-Header h1 {
+header h1 {
     margin: 0 0 16px;
     font-size: 28px;
 }
@@ -38,9 +38,18 @@ section {
     width: 100%; 
     
 }
+@media (min-width: 768px) {
+   /* aturan CSS untuk viewport dengan lebar minimal 768px */
+        }
+   nav ul {
+       flex-direction: row;
+       justify-content: flex-start;
+       align-items: center;
+         gap: 16px;
+    }
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
 }
  #home {
