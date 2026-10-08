@@ -11,9 +11,9 @@ Perangkat bergerak: [Belum ada hasil pengujian aktual. Berdasarkan CSS, viewport
 
 - Desktop: [Belum ada hasil pengujian aktual. Berdasarkan CSS, viewport mulai 768px menggunakan dua kolom.]
 - Galat dan perbaikan: [Aturan media query belum mengatur layout desktop. Label radio juga belum cocok dengan ID input; tag form perlu dirapikan.]
-- Validasi CSS: [Belum dilakukan.]
+- Validasi CSS: [: Belum ada hasil validasi CSS yang dapat dipastikan dari file yang tersedia.]
 
 ## Repositori
 
-URL GitHub: [tempel URL repositori]
+URL GitHub: [https://github.com/dokjacia/2611500006-venecia-calista-steffanny-TI1A-2627G.git]
 Isi README.md berdasarkan hasil pengembangan, pengujian, dan validasi yang benar - benar
