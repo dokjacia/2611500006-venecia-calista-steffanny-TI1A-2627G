@@ -8,23 +8,11 @@ validasi formulir kontak.
 
 ## Fitur dan Pengembangan
 
-- **HTML:** halaman memiliki bagian Beranda, Tentang Saya, dan Kontak. Formulir
-  menyediakan input nama, email, semester, tanggal kunjungan, jenis pesan,
-  topik minat, program studi, dan pesan.
-- **CSS:** halaman menggunakan Grid dan Flexbox. Pada layar di bawah 768 px,
-  konten ditampilkan satu kolom dan navigasi menggunakan tombol hamburger di
-  sebelah kiri judul. Pada layar mulai 768 px, konten utama menggunakan dua
-  kolom, tautan navigasi ditampilkan mendatar, dan tombol hamburger disembunyikan.
-- **JavaScript dan DOM:** event `click` membuka atau menutup navigasi dan
-  memperbarui atribut aksesibilitas tombol. Memilih tautan navigasi juga menutup
-  menu.
-- **Validasi formulir:** event `submit` mencegah pengiriman halaman dan
-  memeriksa nama (3-50 karakter), format email, semester bilangan bulat 1-14,
-  tanggal, pilihan jenis pesan, minimal satu topik minat, program studi, serta
-  pesan wajib dengan panjang maksimal 300 karakter.
-- Pesan kesalahan atau keberhasilan ditampilkan pada halaman. Pesan dibersihkan
-  saat formulir diubah atau di-reset. Validasi dilakukan di sisi klien; formulir
-  belum mengirim atau menyimpan data ke server.
+- Struktur halaman (index.html): menampilkan profil, navigasi Beranda/Tentang/Kontak, dan formulir kontak. Formulir menyediakan isian nama, email, semester, tanggal kunjungan, jenis pesan, topik minat, program studi, dan pesan.
+- Tampilan responsif (style.css): menggunakan CSS Grid untuk menyusun konten menjadi satu kolom pada layar kecil dan dua kolom mulai lebar 768 piksel. Pada layar hingga 767 piksel, menu navigasi dapat dibuka dengan tombol Menu.
+- Interaksi navigasi (script.js): event click pada tombol menu menampilkan/menyembunyikan navigasi, memperbarui atribut aria-expanded, dan mengganti label aksesibilitas tombol.
+- Validasi formulir (script.js): event submit memeriksa nama (3–50 karakter), format email, semester (1–14), tanggal kunjungan, pilihan jenis pesan, minimal satu topik, program studi, serta pesan (wajib diisi dan maksimal 300 karakter). Pesan hasil validasi ditampilkan pada elemen #formFeedback.
+- Reset dan input (script.js): tombol Batal mereset formulir; event reset dan input mengosongkan pesan feedback.
 
 ## Pengujian
 
@@ -38,12 +26,6 @@ Pengujian manual dilakukan di browser lokal pada halaman `index.html`:
 - Formulir yang diisi dengan data valid menampilkan pesan
   "Form berhasil divalidasi."
 - Tidak ditemukan galat JavaScript selama pengujian.
-
-## File
-
-- `index.html` - struktur halaman dan elemen formulir.
-- `style.css` - gaya visual dan layout responsif.
-- `script.js` - interaksi navigasi dan validasi formulir.
 
 ## Riwayat Pengembangan
 
