@@ -29,5 +29,5 @@ Pengujian manual dilakukan di browser lokal pada halaman `index.html`:
 
 ## Riwayat Pengembangan
 
-Perubahan yang didokumentasikan: penambahan navigasi responsif, validasi
+Perubahan yang didokumentasikan: menambahkan javascript, memperbaiki css,penambahan navigasi responsif, validasi
 formulir sisi klien, pesan hasil validasi, dan perbaikan posisi tombol hamburger.
