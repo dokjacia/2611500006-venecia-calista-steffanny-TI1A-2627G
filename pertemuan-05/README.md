@@ -1,20 +1,28 @@
 # Pertemuan 5 - JavaScript Dasar, DOM, Event, dan Validasi Sisi Klien
 
-Deskripsi
-Dokumentasi pengembangan halaman web pada P5, meliputi JavaScript, DOM, event listener, interaksi
-navigasi, dan validasi formulir sisi klien.
-Fitur dan Pengembangan
+## Deskripsi
 
-[Nama fitur/tahap]: [Penjelasan singkat perubahan yang dilakukan.]
-[Nama fitur/tahap]: [Penjelasan singkat perubahan yang dilakukan.]
-Tambahkan entri setiap kali ada perkembangan penting pada proyek.
-Pengujian
+Halaman profil mahasiswa menggunakan JavaScript untuk mengendalikan navigasi
+dan memvalidasi formulir kontak di sisi klien.
 
-[Fitur yang diuji]: [Langkah pengujian dan hasil aktual.]
-[Fitur yang diuji]: [Langkah pengujian dan hasil aktual.]
-Perbarui bagian ini setelah melakukan pengujian atau debugging yang relevan.
-Riwayat Pengembangan
+## Fitur
 
-Catat perkembangan melalui commit Git yang bermakna.
-[Pesan commit]: [Ringkasan perubahan dan hasil pengujiannya.]
-[Pesan commit]: [Ringkasan perubahan dan hasil pengujiannya.]
+- Tombol navigasi ponsel membuka dan menutup menu serta memperbarui atribut
+  aksesibilitasnya. Memilih tautan menu juga menutup menu.
+- Validasi formulir memeriksa nama, email, semester bulat 1-14, tanggal,
+  jenis pesan, minimal satu topik, program studi, dan pesan maksimal 300 karakter.
+- Pesan hasil validasi ditampilkan pada halaman tanpa mengirim formulir.
+- CSS mengatur tampilan responsif dan status pesan validasi.
+
+## Pengujian
+
+Pengujian manual pada browser lokal:
+
+- Menu navigasi ponsel dapat dibuka, dan kembali tertutup setelah tautan dipilih.
+- Pengiriman formulir kosong menampilkan pesan kesalahan nama.
+- Formulir dengan data valid menampilkan pesan bahwa formulir berhasil divalidasi.
+- Tidak ada galat JavaScript saat halaman dijalankan.
+
+## Riwayat Pengembangan
+
+Perkembangan proyek tercatat melalui commit Git pada repository.
