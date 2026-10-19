@@ -36,7 +36,7 @@
         <h2>Selamat Datang</h2>
         <p>Halo, Saya Venecia Calista Steffanny. Saya sedang mempelajari Pemrograman Web Dasar.</p>
 
-        <img src="IMG/veneciaPlenger.png" alt="Foto Profil Venecia calista Steffanny">
+        <img src="IMG/miku7.jpg" alt="Foto Profil Venecia calista Steffanny">
     </section>
 
     <section id="about">
