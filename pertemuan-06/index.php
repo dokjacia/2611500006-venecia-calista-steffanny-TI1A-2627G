@@ -93,6 +93,8 @@ $fokusProgramStudi = "Belum ditentukan";
            <p>Sisa semester hingga batas: <?php echo $sisaSemester; ?></p>
         <p>Pemeriksaan rentang semester: <?php echo $statusSemester; ?></p>
         <p>IPK: <?php echo number_format($ipk, 2, ',', '.'); ?></p>
+        <p>Catatan tambahan: <?php echo $catatanTambahan === null ? "Catatan
+praktik PHP." : $catatanTambahan; ?></p>
         <p>Saya mahasiswa Program Studi Teknik Informatika.</p>
         <h3>Target Belajar (Perulangan for)</h3>
         <ol>
@@ -130,6 +132,7 @@ echo "<li>Semester " . $nomorSemester . "</li>";
 $nomorSemester++; // operator penugasan
 }
 ?>
+
 </ol>
     </article>
     </section>
@@ -231,6 +234,7 @@ value="Pertanyaan" required/>
  </main>
     <footer>
         <p>© 2026 Venecia Calista Steffanny [2611500006].</p>
+        <p>&copy; <?= date("Y") ?> <?php echo $namaMahasiswa; ?> [<?= $nim ?>]</p>
     </footer>
     <script src="script.js"></script>
 </body>
