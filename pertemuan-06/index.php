@@ -49,7 +49,9 @@ const PROFIL_GITHUB = "satpamal";
  <main>
     <section id="home">
         <h2>Selamat Datang</h2>
-        <p>Halo, Saya Venecia Calista Steffanny. Saya sedang mempelajari Pemrograman Web Dasar.</p>
+        <p>Halo, Saya <strong><?php echo $namaMahasiswa; ?></strong>.
+         Saya sedang mempelajari matakuliah <strong><?php print NAMA_MATA_KULIAH; ?></strong>
+        </strong> pada tahun akademik <strong><?php echo $tahunAkademik; ?></strong>.</p>
 
         <img src="IMG/miku7.jpg" alt="Foto Profil Venecia calista Steffanny">
     </section>
@@ -70,7 +72,9 @@ const PROFIL_GITHUB = "satpamal";
     </section>
 <section id="contact">
     <h2>Kontak</h2>
-   <p>Kunjungi <a href="https://github.com/dokjacia/2611500006-venecia-calista-steffanny-TI1A-2627G">profil GitHub saya</a>.</p>
+   <p>Kunjungi 
+    <a target="_blank" href="https://github.com/<?= PROFIL_GITHUB ?>">profil GitHub saya</a>
+</p>
 
    <form id="contactForm" action="index.html" method="get" novalidate>
     <div class="form-group">
