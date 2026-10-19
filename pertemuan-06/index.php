@@ -15,7 +15,7 @@
 
     <?php
     // Komentar satu baris.
-    echo "Keluaran menggunakan echo.";
+    print "Keluaran menggunakan print.";
     
     /*
     Komentar beberapa baris.
