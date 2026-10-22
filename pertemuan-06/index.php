@@ -3,7 +3,7 @@
 // Bagian 1: Variabel dan konstanta
 $nim = "2611500006";
 $namaMahasiswa = "Venecia Calista Steffanny";
-$programStudi = "SI";
+$programStudi = "TI";
 $tahunAkademik = "2026/2027";
 $semester = 1;
 $ipk = 3.99;
