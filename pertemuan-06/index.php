@@ -122,7 +122,7 @@ echo "</li>";
 }
 ?>
         </ol>
-        <h3>Semester (Perulangan while):</h3>
+        <h3>Semester</h3>
 <ol>
 <?php
 $nomorSemester = 1;
