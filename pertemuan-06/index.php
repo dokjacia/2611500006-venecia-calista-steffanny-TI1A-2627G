@@ -95,7 +95,7 @@ $fokusProgramStudi = "Belum ditentukan";
         <p>IPK: <?php echo number_format($ipk, 2, '.', ''); ?></p>
         <p>Catatan tambahan: <?php echo $catatanTambahan === null ? "Belum ada" : $catatanTambahan; ?></p>
         <p>Saya mahasiswa Program Studi Teknik Informatika.</p>
-        <h3>Target Belajar (Perulangan for)</h3>
+        <h3>Target Belajar </h3>
         <ol>
            <?php
 // Perulangan for tanpa array; materi larik dibahas pada P9.
