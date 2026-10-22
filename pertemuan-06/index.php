@@ -1,16 +1,16 @@
 <?php
 // P6: PHP dasar dan pemrograman sisi peladen
 // Bagian 1: Variabel dan konstanta
-$nim = "0344300002";
-$namaMahasiswa = "Hatsune miku";
-$programStudi = "SI";
+$nim = "2611500006";
+$namaMahasiswa = "Venecia Calista Steffanny";
+$programStudi = "TI";
 $tahunAkademik = "2026/2027";
-$semester = 8;
-$ipk = 3.75;
+$semester = 1;
+$ipk = 3.99;
 $statusAktif = true;
 $catatanTambahan = null;
 const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
-const PROFIL_GITHUB = "satpamal";
+const PROFIL_GITHUB = "dokjacia";
 // Bagian 2: Operator
 $batasSemester = 8;
 $sisaSemester = $batasSemester - $semester;
@@ -92,9 +92,8 @@ $fokusProgramStudi = "Belum ditentukan";
           <p>Semester: <?php echo $semester . " (" . $keteranganSemester . ")"; ?></p>
            <p>Sisa semester hingga batas: <?php echo $sisaSemester; ?></p>
         <p>Pemeriksaan rentang semester: <?php echo $statusSemester; ?></p>
-        <p>IPK: <?php echo number_format($ipk, 2, ',', '.'); ?></p>
-        <p>Catatan tambahan: <?php echo $catatanTambahan === null ? "Catatan
-praktik PHP ." : $catatanTambahan; ?></p>
+        <p>IPK: <?php echo number_format($ipk, 2, '.', ''); ?></p>
+        <p>Catatan tambahan: <?php echo $catatanTambahan === null ? "Belum ada" : $catatanTambahan; ?></p>
         <p>Saya mahasiswa Program Studi Teknik Informatika.</p>
         <h3>Target Belajar (Perulangan for)</h3>
         <ol>
