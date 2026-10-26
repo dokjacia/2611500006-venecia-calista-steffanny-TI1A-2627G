@@ -1,5 +1,8 @@
 <?php
 // P6: PHP dasar dan pemrograman sisi peladen
+echo $_GET['nama']; 
+echo $_GET['email'];
+echo $_GET['semester'];
 // Bagian 1: Variabel dan konstanta
 $nim = "0344300002";
 $namaMahasiswa = "Cantika Putih";
