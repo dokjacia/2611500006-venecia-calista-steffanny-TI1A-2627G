@@ -5,3 +5,5 @@ di pertemua-07 saya mengembangkan,
 3. mencoba superglobal $\_GET untuk nama,email,semester.
 4. mencoba superglobal $\_POST untuk nama,email,semester.
 5. menambahkan seleksi bagian topik minat dan dapat di kenali oleh java script
+6. menambahkan serta menguji bagian pengisian form mulai dari nama,email,semester,tanggal kunjungan,jenis pesan,topik minat,program studi,dan pesan
+ketika form tersebut tidak di isi akan muncul tulisan untuk mohon di isi serta ketika ketikan email tidak tepat maka akan muncul emal tidak valid

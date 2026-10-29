@@ -5,7 +5,6 @@ if (isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['semester'])
 	$_SESSION['nama'] = $_POST['nama'];
 	$_SESSION['email'] = $_POST['email'];
 	$_SESSION['semester'] = $_POST['semester'];
-	echo "Nama yang diterima: " . htmlspecialchars($_POST['nama'], ENT_QUOTES, 'UTF-8');
 }
 // P7: nilai dari session di simpan ke dalam variabel lokal
 $nama = trim((string) ($_POST['nama'] ?? ''));
@@ -228,10 +227,10 @@ switch ($programStudi) {
 		<section id="contact">
 			<h2>Kontak</h2>
 			<?php if ($pesanKesalahan !== ''): ?>
-			<p class="form-feedback-error">
+				<p class="form-feedback-error">
 				<?= htmlspecialchars($pesanKesalahan, ENT_QUOTES, 'UTF-8') ?>
 				</p>
-				<?php endif	; ?>
+			<?php endif; ?>
 
 			<p>
 				Kunjungi
@@ -318,13 +317,35 @@ switch ($programStudi) {
 				<button type="reset">Batal</button>
 				<p id="formFeedback"></p>
 			</form>
+
+			<?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+				<h3>Data yang Diterima Peladen</h3>
+				<p>Nama: <?= htmlspecialchars($nama, ENT_QUOTES, 'UTF-8') ?></p>
+				<p>Email: <?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?></p>
+				<p>Semester: <?= htmlspecialchars($semesterForm, ENT_QUOTES, 'UTF-8') ?></p>
+				<p>Tanggal kunjungan: <?= htmlspecialchars($tanggal, ENT_QUOTES, 'UTF-8') ?></p>
+				<p>Jenis pesan: <?= htmlspecialchars($jenisPesan, ENT_QUOTES, 'UTF-8') ?></p>
+				<p>Program studi: <?= htmlspecialchars($prodi, ENT_QUOTES, 'UTF-8') ?></p>
+				<p>Minat:</p>
+				<?php if (is_array($minat) && count($minat) > 0): ?>
+					<ul>
+						<?php foreach ($minat as $topik): ?>
+							<li><?= htmlspecialchars((string) $topik, ENT_QUOTES, 'UTF-8') ?></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php else: ?>
+					<p>Tidak ada minat yang dipilih.</p>
+				<?php endif; ?>
+				<p>Pesan:</p>
+				<p><?= nl2br(htmlspecialchars($pesan, ENT_QUOTES, 'UTF-8')) ?></p>
+			<?php endif; ?>
 		</section>
 	</main>
 
 	<footer>
 		<p>&copy; <?= date("Y") ?> <?php echo $namaMahasiswa; ?> [<?= $nim ?>]</p>
 	</footer>
-	<!-- <script src="script.js"></script> -->
+	<script src="script.js"></script>
 </body>
 
 </html>
