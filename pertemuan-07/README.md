@@ -4,4 +4,4 @@ di pertemua-07 saya mengembangkan,
 2. event.prevent(); ternyata menhalangi eksekusi submit.
 3. mencoba superglobal $\_GET untuk nama,email,semester.
 4. mencoba superglobal $\_POST untuk nama,email,semester.
-5. 
+5. menambahkan seleksi bagian topik minat dan dapat di kenali oleh java script

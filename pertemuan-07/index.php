@@ -8,15 +8,83 @@ if (isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['semester'])
 	echo "Nama yang diterima: " . htmlspecialchars($_POST['nama'], ENT_QUOTES, 'UTF-8');
 }
 // P7: nilai dari session di simpan ke dalam variabel lokal
-$nama = $_SESSION['nama'] ?? '';
-$email = $_SESSION['email'] ?? '';
-$semesterForm = $_SESSION['semester'] ?? '';
-$tanggal = $_SESSION['tanggal'] ?? '';
-$jenisPesan = $_SESSION['jenis_pesan'] ?? '';
-$prodi = $_SESSION['prodi'] ?? '';
-$pesan = $_SESSION['pesan'] ?? '';
-$minat = $_SESSION['minat'] ?? [];
+$nama = trim((string) ($_POST['nama'] ?? ''));
+$email = trim((string) ($_POST['email'] ?? ''));
+$semesterForm = trim((string) ($_POST['semester'] ?? ''));
+$jenisPesan = trim((string) ($_POST['jenis_pesan'] ?? ''));
+$prodi = trim((string) ($_POST['prodi'] ?? ''));
+$pesan = trim((string) ($_POST['pesan'] ?? ''));
+$tanggal = trim((string) ($_POST['tanggal'] ?? ''));
+$minat = $_POST['minat'] ?? [];
+$pesanKesalahan = '';
 
+// Validasi lainnya tetap di sini
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (trim($nama ?? '') === '') {
+$pesanKesalahan .= 'Nama lengkap wajib diisi. ';
+}
+	if (trim($email) === '') {
+	$pesanKesalahan .= 'Email wajib diisi. ';
+}
+	if (trim($semesterForm) === '') {
+$pesanKesalahan .= 'Semester wajib diisi. ';
+}	
+	if (trim($tanggal) === '') {
+$pesanKesalahan .= 'Tanggal kunjungan wajib diisi. ';
+}
+if ($jenisPesan === '') {
+$pesanKesalahan .= 'Jenis pesan wajib dipilih. ';
+}
+if ($prodi === '') {
+$pesanKesalahan .= 'Program studi wajib dipilih. ';
+}
+if (trim($pesan) === '') {
+$pesanKesalahan .= 'Pesan wajib diisi. ';
+}
+if (empty($minat)) {
+$pesanKesalahan .= 'Minat wajib dipilih minimal satu. ';}
+
+if (trim($semesterForm) !== '') {
+$semesterValid = filter_var(
+$semesterForm,
+FILTER_VALIDATE_INT
+);
+
+if (
+	$semesterValid === false ||
+	$semesterValid < 1 ||
+	$semesterValid > 14
+) {
+$pesanKesalahan .= 'Semester harus berupa angka antara 1 hingga 14. ';
+	}
+}
+if (trim($email) !== '') {
+	if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+		$pesanKesalahan .= 'Format email tidak valid. ';
+	}
+}
+if (!in_array($jenisPesan, ['pertanyaan', 'saran'], true)) {
+	$pesanKesalahan .= 'Jenis pesan tidak valid. ';
+}
+
+if (!in_array($prodi, ['SI', 'TI'], true)) {
+	$pesanKesalahan .= 'Program studi tidak valid. ';
+}
+
+$minatDiizinkan = ['HTML', 'CSS'];
+
+if(!is_array($minat)) {
+	$pesanKesalahan .= 'Format pilihan topik tidak valid. ';
+	} else {
+	foreach ($minat as $topik) {
+	if (!in_array($topik, $minatDiizinkan, true)) {
+	$pesanKesalahan .= 'Pilihan topik tidak valid. ';
+	break;
+}
+}
+}
+}
 // Bagian 1: Variabel dan konstanta
 $nim = "2611500006";
 $namaMahasiswa = "Venecia Calista Steffanny";
@@ -159,6 +227,11 @@ switch ($programStudi) {
 
 		<section id="contact">
 			<h2>Kontak</h2>
+			<?php if ($pesanKesalahan !== ''): ?>
+			<p class="form-feedback-error">
+				<?= htmlspecialchars($pesanKesalahan, ENT_QUOTES, 'UTF-8') ?>
+				</p>
+				<?php endif	; ?>
 
 			<p>
 				Kunjungi
@@ -251,7 +324,7 @@ switch ($programStudi) {
 	<footer>
 		<p>&copy; <?= date("Y") ?> <?php echo $namaMahasiswa; ?> [<?= $nim ?>]</p>
 	</footer>
-	<script src="script.js"></script>
+	<!-- <script src="script.js"></script> -->
 </body>
 
 </html>
