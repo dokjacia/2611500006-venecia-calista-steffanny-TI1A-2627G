@@ -1,20 +1,34 @@
 <?php
-// P6: PHP dasar dan pemrograman sisi peladen
-echo $_POST['nama'] . " ";
-echo $_POST['email'] . " ";
-echo $_POST['semester'] . " ";
+session_start();
+// P7: menangkap nilai input form,disimpan ke session
+if (isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['semester'])) {
+	$_SESSION['nama'] = $_POST['nama'];
+	$_SESSION['email'] = $_POST['email'];
+	$_SESSION['semester'] = $_POST['semester'];
+	echo "Nama yang diterima: " . htmlspecialchars($_POST['nama'], ENT_QUOTES, 'UTF-8');
+}
+// P7: nilai dari session di simpan ke dalam variabel lokal
+$nama = $_SESSION['nama'] ?? '';
+$email = $_SESSION['email'] ?? '';
+$semesterForm = $_SESSION['semester'] ?? '';
+$tanggal = $_SESSION['tanggal'] ?? '';
+$jenisPesan = $_SESSION['jenis_pesan'] ?? '';
+$prodi = $_SESSION['prodi'] ?? '';
+$pesan = $_SESSION['pesan'] ?? '';
+$minat = $_SESSION['minat'] ?? [];
+
 // Bagian 1: Variabel dan konstanta
-$nim = "0344300002";
-$namaMahasiswa = "Cantika Putih";
-$programStudi = "SI";
+$nim = "2611500006";
+$namaMahasiswa = "Venecia Calista Steffanny";
+$programStudi = "TI";
 $tahunAkademik = "2026/2027";
-$semester = 4;
-$ipk = 3.75;
+$semester = 1;
+$ipk = 0.00;
 $statusAktif = true;
 $catatanTambahan = null;
 
 const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
-const PROFIL_GITHUB = "satpamal";
+const PROFIL_GITHUB = "dokjacia";
 
 // Bagian 2: Operator
 $batasSemester = 8;
@@ -85,7 +99,7 @@ switch ($programStudi) {
 			<h2>Selamat Datang</h2>
 			<p>Halo, saya <strong><?php echo $namaMahasiswa; ?></strong>. Saya sedang mempelajari matakuliah <strong><?php print NAMA_MATA_KULIAH; ?></strong> pada tahun akademik <?php echo $tahunAkademik; ?>.</p>
 
-			<img src="img/foto-profil.jpg" alt="Foto profil Nama Mahasiswa" />
+			<img src="img/image.png" alt="Foto profil Nama Mahasiswa" />
 		</section>
 
 		<section id="about">
@@ -163,6 +177,7 @@ switch ($programStudi) {
 						placeholder="Masukkan nama lengkap"
 						minlength="3"
 						maxlength="50"
+						value="<?php echo $nama; ?>"
 						required />
 				</div>
 
@@ -197,10 +212,10 @@ switch ($programStudi) {
 				<div class="form-group">
 					<p>Topik yang Diminati</p>
 
-					<input type="checkbox" id="minat-html" name="minat" value="HTML" />
+					<input type="checkbox" id="minat-html" name="minat[]" value="HTML" />
 					<label for="minat-html">HTML</label>
 
-					<input type="checkbox" id="minat-css" name="minat" value="CSS" />
+					<input type="checkbox" id="minat-css" name="minat[]" value="CSS" />
 					<label for="minat-css">CSS</label>
 				</div>
 

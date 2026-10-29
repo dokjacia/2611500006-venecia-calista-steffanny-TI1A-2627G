@@ -1,8 +1,8 @@
 <?php
 // P6: PHP dasar dan pemrograman sisi peladen
-echo $_GET['nama']; . "	"
-echo $_GET['email']; . "	"
-echo $_GET['semester']; . "	"
+echo $_GET['nama'] . "	" ;
+echo $_GET['email'] . " " ;
+echo $_GET['semester'] . "	" ;
 // Bagian 1: Variabel dan konstanta
 $nim = "0344300002";
 $namaMahasiswa = "Cantika Putih";
@@ -151,7 +151,7 @@ switch ($programStudi) {
 				<a target="_blank" href="https://github.com/<?= PROFIL_GITHUB ?>">profil GitHub saya</a>.
 			</p>
 
-			<form id="contactForm" action="index.php" method="post" novalidate>
+			<form id="contactForm" action="index.php" method="get" novalidate>
 				<div class="form-group">
 					<label for="nama">Nama Lengkap</label><br />
 
