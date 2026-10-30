@@ -11,9 +11,9 @@ ketika form tersebut tidak di isi akan muncul tulisan untuk mohon di isi serta k
 8. menambahkan session agar data form dan pesan kesalahan tetap tersimpan setelah halaman dimuat ulang. Setelah form dikirim, halaman kembali ke `index.php`. Pesan kesalahan ditampilkan satu kali.
 
 ## Cara menjalankan
-1. Jalankan Laragon dan klik **Start All**.
+1. Jalankan Laragon dan klik 
 2. Buka `http://localhost/pwd/TI1A/2611500006-venecia-calista-steffanny-TI1A-2627G/pertemuan-07/index.php` di browser.
-3. Isi formulir, lalu klik **Kirim**.
+3. Isi formulir, lalu klik dan kirim
 
 ## Hasil pengujian
 - Halaman berhasil dibuka melalui server lokal.
