@@ -1,21 +1,18 @@
 <?php
 session_start();
 // P7: menangkap nilai input form,disimpan ke session
-if (isset($_POST['nama']) && isset($_POST['email']) && isset($_POST['semester'])) {
-	$_SESSION['nama'] = $_POST['nama'];
-	$_SESSION['email'] = $_POST['email'];
-	$_SESSION['semester'] = $_POST['semester'];
-}
-// P7: nilai dari session di simpan ke dalam variabel lokal
-$nama = trim((string) ($_POST['nama'] ?? ''));
-$email = trim((string) ($_POST['email'] ?? ''));
-$semesterForm = trim((string) ($_POST['semester'] ?? ''));
-$jenisPesan = trim((string) ($_POST['jenis_pesan'] ?? ''));
-$prodi = trim((string) ($_POST['prodi'] ?? ''));
-$pesan = trim((string) ($_POST['pesan'] ?? ''));
-$tanggal = trim((string) ($_POST['tanggal'] ?? ''));
-$minat = $_POST['minat'] ?? [];
-$pesanKesalahan = '';
+$form = $_SESSION['form'] ?? [];
+
+$nama = trim((string) ($_POST['nama'] ?? $form['nama'] ?? ''));
+$email = trim((string) ($_POST['email'] ?? $form['email'] ?? ''));
+$semesterForm = trim((string) ($_POST['semester'] ?? $form['semesterForm'] ?? ''));
+$jenisPesan = trim((string) ($_POST['jenis_pesan'] ?? $form['jenisPesan'] ?? ''));
+$prodi = trim((string) ($_POST['prodi'] ?? $form['prodi'] ?? ''));
+$pesan = trim((string) ($_POST['pesan'] ?? $form['pesan'] ?? ''));
+$tanggal = trim((string) ($_POST['tanggal'] ?? $form['tanggal'] ?? ''));
+$minat = $_POST['minat'] ?? $form['minat'] ?? [];
+
+$pesanKesalahan = $_SESSION['pesanKesalahan'] ?? '';
 
 // Validasi lainnya tetap di sini
 
@@ -83,6 +80,22 @@ if(!is_array($minat)) {
 }
 }
 }
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['pesanKesalahan'] = $pesanKesalahan;
+    $_SESSION['form'] = [
+        'nama' => $nama,
+        'email' => $email,
+        'semesterForm' => $semesterForm,
+        'jenisPesan' => $jenisPesan,
+        'prodi' => $prodi,
+        'pesan' => $pesan,
+        'tanggal' => $tanggal,
+        'minat' => $minat,
+    ];
+
+    header('Location: index.php');
+    exit;
 }
 // Bagian 1: Variabel dan konstanta
 $nim = "2611500006";
@@ -230,6 +243,7 @@ switch ($programStudi) {
 				<p class="form-feedback-error">
 				<?= htmlspecialchars($pesanKesalahan, ENT_QUOTES, 'UTF-8') ?>
 				</p>
+				<?php unset($_SESSION['pesanKesalahan']); ?>
 			<?php endif; ?>
 
 			<p>
@@ -318,7 +332,7 @@ switch ($programStudi) {
 				<p id="formFeedback"></p>
 			</form>
 
-			<?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+			<?php if (!empty($nama)): ?>
 				<h3>Data yang Diterima Peladen</h3>
 				<p>Nama: <?= htmlspecialchars($nama, ENT_QUOTES, 'UTF-8') ?></p>
 				<p>Email: <?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?></p>

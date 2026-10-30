@@ -8,3 +8,4 @@ di pertemua-07 saya mengembangkan,
 6. menambahkan serta menguji bagian pengisian form mulai dari nama,email,semester,tanggal kunjungan,jenis pesan,topik minat,program studi,dan pesan
 ketika form tersebut tidak di isi akan muncul tulisan untuk mohon di isi serta ketika ketikan email tidak tepat maka akan muncul emal tidak valid
 7. menambahkan peladen shingga ketika di kirim submit akan  terlihat hasil isi form pada di bawah ketika selesai di isi
+8. menambahkan session agar data form dan pesan kesalahan tetap tersimpan setelah halaman dimuat ulang. Setelah form dikirim, halaman kembali ke `index.php`. Pesan kesalahan ditampilkan satu kali.
