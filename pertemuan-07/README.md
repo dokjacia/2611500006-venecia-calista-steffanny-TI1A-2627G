@@ -9,3 +9,14 @@ di pertemua-07 saya mengembangkan,
 ketika form tersebut tidak di isi akan muncul tulisan untuk mohon di isi serta ketika ketikan email tidak tepat maka akan muncul emal tidak valid
 7. menambahkan peladen shingga ketika di kirim submit akan  terlihat hasil isi form pada di bawah ketika selesai di isi
 8. menambahkan session agar data form dan pesan kesalahan tetap tersimpan setelah halaman dimuat ulang. Setelah form dikirim, halaman kembali ke `index.php`. Pesan kesalahan ditampilkan satu kali.
+
+## Cara menjalankan
+1. Jalankan Laragon dan klik **Start All**.
+2. Buka `http://localhost/pwd/TI1A/2611500006-venecia-calista-steffanny-TI1A-2627G/pertemuan-07/index.php` di browser.
+3. Isi formulir, lalu klik **Kirim**.
+
+## Hasil pengujian
+- Halaman berhasil dibuka melalui server lokal.
+- Email yang salah dan semester di luar batas menampilkan pesan kesalahan.
+- Setelah pesan kesalahan ditampilkan, pesan tersebut tidak muncul lagi saat halaman dimuat ulang.
+- Data formulir yang valid berhasil ditampilkan di bawah formulir.
