@@ -166,6 +166,27 @@ section {
 #rencana-kegiatan label {
   color: #1f2937;
   font-weight: bold;
+  max-width: 100%;
+  width: 100%;
+}
+
+#rencana-kegiatan .input-form {
+  width: 100%;
+  max-width: 100%;
+  background-color: #ffffff;
+  color: #111827;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 8px;
+  margin: 4px 0;
+  border: 1px solid #94a3b8;
+}
+
+#rencana-kegiatan {
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding: 20px;
+  margin: 0;
 }
 
 #contact label {

@@ -243,18 +243,18 @@ switch ($programStudi) {
         placeholder="Masukkan nama tempat"
         disabled />
 </div>
+<div class="form-group">
+	<label for="deskripsi">Deskripsi Kegiatan</label><br />
+	<textarea
+		class="input-form"
+		id="deskripsi"
+		name="deskripsi"
+		maxlength="300"
+		placeholder="Tulis deskripsi kegiatan"
+		required></textarea>
 				
-				</div>
-				<div class="form-group">
-					<label for="Deskripsi_Kegiatan">Deskripsi Kegiatan</label><br />
-					<textarea
-						class="input-form"
-						id="Deskripsi_Kegiatan"
-						name="Deskripsi_Kegiatan"
-						placeholder="Tulis deskripsi kegiatan"
-						required></textarea>
-				</div>
 				<button type="submit">Kirim</button>
+<button type="reset">Batal</button>
 			</form>
 		</section>
 
