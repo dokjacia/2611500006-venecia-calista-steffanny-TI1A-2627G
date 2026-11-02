@@ -3,34 +3,112 @@ session_start();
 
 // P7: Memproses data formulir dan menyimpannya ke dalam session.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-	$nama = trim((string) ($_POST["nama"] ?? ""));
-	$email = trim((string) ($_POST["email"] ?? ""));
-	$semesterForm = trim((string) ($_POST["semester"] ?? ""));
-	$tanggal = trim((string) ($_POST["tanggal"] ?? ""));
-	$jenisPesan = trim((string) ($_POST["jenis_pesan"] ?? ""));
-	$minat = $_POST["minat"] ?? [];
-	$prodi = trim((string) ($_POST["prodi"] ?? ""));
-	$pesan = trim((string) ($_POST["pesan"] ?? ""));
+	$formType = $_POST["form_type"] ?? "";
 
-	// Checkbox dapat mengirimkan lebih dari satu nilai.
-	if (!is_array($minat)) {
-		$minat = [];
+	if ($formType === "rencana-kegiatan") {
+		$ambilPost = static function (string $key): string {
+			$value = $_POST[$key] ?? "";
+			return is_string($value) ? trim($value) : "";
+		};
+
+		$kegiatan = $ambilPost("kegiatan");
+		$kategori = $ambilPost("kategori_kegiatan");
+		$tanggalKegiatan = $ambilPost("tanggal_Pelaksanaan");
+		$jenisLokasi = $ambilPost("jenis_lokasi");
+		$ruanganKegiatan = $ambilPost("ruangan");
+		$lokasiLuar = $ambilPost("lokasi_luar");
+		$deskripsiKegiatan = $ambilPost("deskripsi");
+		$errors = [];
+		$kategoriDiizinkan = ["Akademik", "Non-Akademik", "Pengabdian Masyarakat", "Seminar"];
+		$ruanganDiizinkan = ["Aula", "Lab Komputer 1", "Lab Komputer 2", "Lab Komputer 3", "Lab Komputer 4", "Ruang Kelas"];
+
+		if (strlen($kegiatan) < 3 || strlen($kegiatan) > 100) {
+			$errors[] = "Nama kegiatan harus terdiri dari 3 sampai 100 karakter.";
+		}
+		if (!in_array($kategori, $kategoriDiizinkan, true)) {
+			$errors[] = "Pilih kategori kegiatan yang tersedia.";
+		}
+
+		$tanggalValid = DateTime::createFromFormat("!Y-m-d", $tanggalKegiatan);
+		if (!$tanggalValid || $tanggalValid->format("Y-m-d") !== $tanggalKegiatan) {
+			$errors[] = "Masukkan tanggal pelaksanaan yang valid.";
+		}
+		if (!in_array($jenisLokasi, ["dalam", "luar"], true)) {
+			$errors[] = "Pilih lokasi kegiatan.";
+		} elseif ($jenisLokasi === "dalam" && !in_array($ruanganKegiatan, $ruanganDiizinkan, true)) {
+			$errors[] = "Pilih ruangan kegiatan di dalam kampus.";
+		} elseif ($jenisLokasi === "luar" && ($lokasiLuar === "" || strlen($lokasiLuar) > 100)) {
+			$errors[] = "Nama lokasi di luar kampus wajib diisi (maksimal 100 karakter).";
+		}
+		if ($deskripsiKegiatan === "" || strlen($deskripsiKegiatan) > 300) {
+			$errors[] = "Deskripsi wajib diisi dan maksimal 300 karakter.";
+		}
+
+		$_SESSION["formRencanaKegiatan"] = [
+			"kegiatan" => $kegiatan,
+			"kategori" => $kategori,
+			"tanggal" => $tanggalKegiatan,
+			"jenis_lokasi" => $jenisLokasi,
+			"ruangan" => $ruanganKegiatan,
+			"lokasi_luar" => $lokasiLuar,
+			"deskripsi" => $deskripsiKegiatan,
+		];
+
+		if ($errors) {
+			$_SESSION["rencanaKegiatanErrors"] = $errors;
+		} else {
+			$lokasiTampilan = $jenisLokasi === "dalam"
+				? "Di dalam kampus - " . $ruanganKegiatan
+				: "Di luar kampus - " . $lokasiLuar;
+			$_SESSION["rencanaKegiatan"] = [
+				"kegiatan" => $kegiatan,
+				"kategori" => $kategori,
+				"tanggal" => $tanggalKegiatan,
+				"lokasi" => $lokasiTampilan,
+				"deskripsi" => $deskripsiKegiatan,
+			];
+			unset($_SESSION["rencanaKegiatanErrors"], $_SESSION["formRencanaKegiatan"]);
+		}
+
+		header("Location: index.php#rencana-kegiatan");
+		exit;
 	}
 
-	// Menyimpan setiap nilai formulir ke dalam session secara terpisah.
-	$_SESSION["nama"] = $nama;
-	$_SESSION["email"] = $email;
-	$_SESSION["semester"] = $semesterForm;
-	$_SESSION["tanggal"] = $tanggal;
-	$_SESSION["jenis_pesan"] = $jenisPesan;
-	$_SESSION["minat"] = $minat;
-	$_SESSION["prodi"] = $prodi;
-	$_SESSION["pesan"] = $pesan;
+	if ($formType === "contact") {
+		$nama = trim((string) ($_POST["nama"] ?? ""));
+		$email = trim((string) ($_POST["email"] ?? ""));
+		$semesterForm = trim((string) ($_POST["semester"] ?? ""));
+		$tanggal = trim((string) ($_POST["tanggal"] ?? ""));
+		$jenisPesan = trim((string) ($_POST["jenis_pesan"] ?? ""));
+		$minat = $_POST["minat"] ?? [];
+		$prodi = trim((string) ($_POST["prodi"] ?? ""));
+		$pesan = trim((string) ($_POST["pesan"] ?? ""));
 
-	// PRG: mencegah pengiriman POST berulang ketika halaman dimuat ulang.
-	header("Location: index.php#contact");
-	exit;
+		if (!is_array($minat)) {
+			$minat = [];
+		}
+
+		$_SESSION["nama"] = $nama;
+		$_SESSION["email"] = $email;
+		$_SESSION["semester"] = $semesterForm;
+		$_SESSION["tanggal"] = $tanggal;
+		$_SESSION["jenis_pesan"] = $jenisPesan;
+		$_SESSION["minat"] = $minat;
+		$_SESSION["prodi"] = $prodi;
+		$_SESSION["pesan"] = $pesan;
+
+		header("Location: index.php#contact");
+		exit;
+	}
 }
+
+$formRencanaKegiatan = $_SESSION["formRencanaKegiatan"] ?? [];
+$rencanaKegiatanErrors = $_SESSION["rencanaKegiatanErrors"] ?? [];
+$rencanaKegiatan = $_SESSION["rencanaKegiatan"] ?? null;
+unset($_SESSION["formRencanaKegiatan"], $_SESSION["rencanaKegiatanErrors"]);
+$escapeHtml = static function ($value): string {
+	return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+};
 
 // Mengamankan data sebelum ditampilkan kembali ke halaman HTML.
 // P6: PHP dasar dan pemrograman sisi peladen
@@ -179,6 +257,7 @@ switch ($programStudi) {
 			<h2>Rencana Kegiatan Mahasiswa</h2>
 			<!-- Konten rencana kegiatan akan ditambahkan di sini -->
 			 <form id="rencanaKegiatanForm" class="js-rencana-kegiatan-form" data-validation="rencana-kegiatan" action="index.php" method="post" novalidate>
+				<input type="hidden" name="form_type" value="rencana-kegiatan" />
 				<div class="form-group">
 					<label for="kegiatan">Nama Kegiatan</label><br />
 					<input
@@ -189,16 +268,17 @@ switch ($programStudi) {
 						placeholder="Masukkan nama kegiatan"
 						minlength="3"
 						maxlength="100"
+						value="<?= $escapeHtml($formRencanaKegiatan["kegiatan"] ?? "") ?>"
 						required />
 				</div>
 				<div class="form-group">
-					<label for="Kategori Kegiatan">Kategori Kegiatan</label><br />
+					<label for="kategori_kegiatan">Kategori Kegiatan</label><br />
 					<select class="input-form" id="kategori_kegiatan" name="kategori_kegiatan" required>
 						<option value="">-- Pilih Kategori Kegiatan --</option>
-						<option value="Akademik">Akademik</option>
-						<option value="Non-Akademik">Organisasi</option>
-						<option value="Pengabdian Masyarakat">Pengabdian Masyarakat</option>
-						<option value="Seminar">Seminar</option>
+						<option value="Akademik" <?= ($formRencanaKegiatan["kategori"] ?? "") === "Akademik" ? "selected" : "" ?>>Akademik</option>
+						<option value="Non-Akademik" <?= ($formRencanaKegiatan["kategori"] ?? "") === "Non-Akademik" ? "selected" : "" ?>>Organisasi</option>
+						<option value="Pengabdian Masyarakat" <?= ($formRencanaKegiatan["kategori"] ?? "") === "Pengabdian Masyarakat" ? "selected" : "" ?>>Pengabdian Masyarakat</option>
+						<option value="Seminar" <?= ($formRencanaKegiatan["kategori"] ?? "") === "Seminar" ? "selected" : "" ?>>Seminar</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -208,6 +288,7 @@ switch ($programStudi) {
 						type="date"
 						id="tanggal_Pelaksanaan"
 						name="tanggal_Pelaksanaan"
+						value="<?= $escapeHtml($formRencanaKegiatan["tanggal"] ?? "") ?>"
 						required />
 						</div>
 				<div class="form-group">
@@ -215,25 +296,25 @@ switch ($programStudi) {
     <label for="jenis_lokasi">Lokasi Kegiatan</label><br />
     <select class="input-form" id="jenis_lokasi" name="jenis_lokasi" required>
         <option value="">-- Pilih Lokasi --</option>
-        <option value="dalam">Di dalam kampus</option>
-        <option value="luar">Di luar kampus</option>
+        <option value="dalam" <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") === "dalam" ? "selected" : "" ?>>Di dalam kampus</option>
+        <option value="luar" <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") === "luar" ? "selected" : "" ?>>Di luar kampus</option>
     </select>
 </div>
 
-<div class="form-group" id="ruanganGroup" hidden>
+<div class="form-group" id="ruanganGroup" <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") !== "dalam" ? "hidden" : "" ?>>
     <label for="ruangan">Pilih Ruangan</label><br />
-    <select class="input-form" id="ruangan" name="ruangan" disabled>
+    <select class="input-form" id="ruangan" name="ruangan" <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") !== "dalam" ? "disabled" : "" ?> <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") === "dalam" ? "required" : "" ?>>
         <option value="">-- Pilih Ruangan --</option>
-        <option value="Aula">Aula</option>
-        <option value="Lab Komputer">Lab Komputer 1</option>
-		<option value="Lab Komputer 2">Lab Komputer 2</option>
-		<option value="Lab Komputer 3">Lab Komputer 3</option>
-		<option value="Lab Komputer 4">Lab Komputer 4</option>
-        <option value="Ruang Kelas">Ruang Kelas</option>
+        <option value="Aula" <?= ($formRencanaKegiatan["ruangan"] ?? "") === "Aula" ? "selected" : "" ?>>Aula</option>
+        <option value="Lab Komputer 1" <?= ($formRencanaKegiatan["ruangan"] ?? "") === "Lab Komputer 1" ? "selected" : "" ?>>Lab Komputer 1</option>
+		<option value="Lab Komputer 2" <?= ($formRencanaKegiatan["ruangan"] ?? "") === "Lab Komputer 2" ? "selected" : "" ?>>Lab Komputer 2</option>
+		<option value="Lab Komputer 3" <?= ($formRencanaKegiatan["ruangan"] ?? "") === "Lab Komputer 3" ? "selected" : "" ?>>Lab Komputer 3</option>
+		<option value="Lab Komputer 4" <?= ($formRencanaKegiatan["ruangan"] ?? "") === "Lab Komputer 4" ? "selected" : "" ?>>Lab Komputer 4</option>
+        <option value="Ruang Kelas" <?= ($formRencanaKegiatan["ruangan"] ?? "") === "Ruang Kelas" ? "selected" : "" ?>>Ruang Kelas</option>
     </select>
 </div>
 
-<div class="form-group" id="lokasiLuarGroup" hidden>
+<div class="form-group" id="lokasiLuarGroup" <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") !== "luar" ? "hidden" : "" ?>>
     <label for="lokasi_luar">Nama Tempat/Lokasi</label><br />
     <input
         class="input-form"
@@ -241,7 +322,10 @@ switch ($programStudi) {
         id="lokasi_luar"
         name="lokasi_luar"
         placeholder="Masukkan nama tempat"
-        disabled />
+        maxlength="100"
+        value="<?= $escapeHtml($formRencanaKegiatan["lokasi_luar"] ?? "") ?>"
+        <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") !== "luar" ? "disabled" : "" ?>
+        <?= ($formRencanaKegiatan["jenis_lokasi"] ?? "") === "luar" ? "required" : "" ?> />
 </div>
 <div class="form-group">
 	<label for="deskripsi">Deskripsi Kegiatan</label><br />
@@ -251,11 +335,32 @@ switch ($programStudi) {
 		name="deskripsi"
 		maxlength="300"
 		placeholder="Tulis deskripsi kegiatan"
-		required></textarea>
-				
+		required
+	><?= $escapeHtml($formRencanaKegiatan["deskripsi"] ?? "") ?></textarea>
+				</div>
+				<?php if ($rencanaKegiatanErrors): ?>
+					<div class="form-feedback-error" role="alert">
+						<ul>
+							<?php foreach ($rencanaKegiatanErrors as $error): ?>
+								<li><?= $escapeHtml($error) ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
 				<button type="submit">Kirim</button>
-<button type="reset">Batal</button>
+				<button type="reset">Batal</button>
 			</form>
+
+			<?php if (is_array($rencanaKegiatan)): ?>
+				<article class="submission-result" aria-live="polite">
+					<h3>Rencana Kegiatan yang Dikirim</h3>
+					<p><strong>Nama Kegiatan:</strong> <?= $escapeHtml($rencanaKegiatan["kegiatan"]) ?></p>
+					<p><strong>Kategori:</strong> <?= $escapeHtml($rencanaKegiatan["kategori"]) ?></p>
+					<p><strong>Tanggal Pelaksanaan:</strong> <?= $escapeHtml($rencanaKegiatan["tanggal"]) ?></p>
+					<p><strong>Lokasi:</strong> <?= $escapeHtml($rencanaKegiatan["lokasi"]) ?></p>
+					<p><strong>Deskripsi:</strong> <?= nl2br($escapeHtml($rencanaKegiatan["deskripsi"])) ?></p>
+				</article>
+			<?php endif; ?>
 		</section>
 
 		<section id="contact">
@@ -267,6 +372,7 @@ switch ($programStudi) {
 			</p>
 
 			<form id="contactForm" class="js-contact-form" data-validation="contact" action="index.php" method="post" novalidate>
+				<input type="hidden" name="form_type" value="contact" />
 				<div class="form-group">
 					<label for="nama">Nama Lengkap</label><br />
 

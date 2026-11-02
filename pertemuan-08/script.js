@@ -126,14 +126,24 @@ contactForms.forEach((contactForm) => {
     }
   });
 });
+const activityForm = document.querySelector(
+  'form[data-validation="rencana-kegiatan"]',
+);
 const jenisLokasi = document.getElementById("jenis_lokasi");
 const ruanganGroup = document.getElementById("ruanganGroup");
 const ruangan = document.getElementById("ruangan");
 const lokasiLuarGroup = document.getElementById("lokasiLuarGroup");
 const lokasiLuar = document.getElementById("lokasi_luar");
 
-if (jenisLokasi && ruanganGroup && ruangan && lokasiLuarGroup && lokasiLuar) {
-  jenisLokasi.addEventListener("change", () => {
+if (
+  activityForm &&
+  jenisLokasi &&
+  ruanganGroup &&
+  ruangan &&
+  lokasiLuarGroup &&
+  lokasiLuar
+) {
+  const perbaruiPilihanLokasi = () => {
     const diDalamKampus = jenisLokasi.value === "dalam";
     const diLuarKampus = jenisLokasi.value === "luar";
 
@@ -144,5 +154,50 @@ if (jenisLokasi && ruanganGroup && ruangan && lokasiLuarGroup && lokasiLuar) {
     lokasiLuarGroup.hidden = !diLuarKampus;
     lokasiLuar.disabled = !diLuarKampus;
     lokasiLuar.required = diLuarKampus;
+  };
+
+  perbaruiPilihanLokasi();
+  jenisLokasi.addEventListener("change", perbaruiPilihanLokasi);
+
+  activityForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const kegiatan = activityForm.elements.namedItem("kegiatan");
+    const deskripsi = activityForm.elements.namedItem("deskripsi");
+    kegiatan.value = kegiatan.value.trim();
+    deskripsi.value = deskripsi.value.trim();
+
+    kegiatan.setCustomValidity(
+      kegiatan.value.length < 3 || kegiatan.value.length > 100
+        ? "Nama kegiatan harus terdiri dari 3 sampai 100 karakter."
+        : "",
+    );
+    deskripsi.setCustomValidity(
+      deskripsi.value.length === 0 || deskripsi.value.length > 300
+        ? "Deskripsi wajib diisi dan maksimal 300 karakter."
+        : "",
+    );
+    lokasiLuar.setCustomValidity(
+      !lokasiLuar.disabled && lokasiLuar.value.trim().length > 100
+        ? "Nama lokasi maksimal 100 karakter."
+        : "",
+    );
+
+    if (!activityForm.checkValidity()) {
+      activityForm.reportValidity();
+      return;
+    }
+
+    HTMLFormElement.prototype.submit.call(activityForm);
+  });
+
+  activityForm.addEventListener("input", (event) => {
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+      event.target.setCustomValidity("");
+    }
+  });
+
+  activityForm.addEventListener("reset", () => {
+    window.setTimeout(perbaruiPilihanLokasi, 0);
   });
 }
