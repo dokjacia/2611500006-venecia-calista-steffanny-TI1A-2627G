@@ -163,6 +163,11 @@ section {
   margin: 12px 0;
 }
 
+#rencana-kegiatan label {
+  color: #1f2937;
+  font-weight: bold;
+}
+
 #contact label {
   color: #1f2937;
   font-weight: bold;

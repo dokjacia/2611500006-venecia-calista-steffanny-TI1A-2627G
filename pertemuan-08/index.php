@@ -178,6 +178,20 @@ switch ($programStudi) {
 		<section id="rencana-kegiatan">
 			<h2>Rencana Kegiatan Mahasiswa</h2>
 			<!-- Konten rencana kegiatan akan ditambahkan di sini -->
+			 <form id="rencanaKegiatanForm" class="js-rencana-kegiatan-form" data-validation="rencana-kegiatan" action="index.php" method="post" novalidate>
+				<div class="form-group">
+					<label for="kegiatan">Nama Kegiatan</label><br />
+					<input
+						class="input-form"
+						type="text"
+						id="kegiatan"
+						name="kegiatan"
+						placeholder="Masukkan nama kegiatan"
+						minlength="3"
+						maxlength="100"
+						required />
+				</div>
+				</form>
 		</section>
 
 		<section id="contact">
