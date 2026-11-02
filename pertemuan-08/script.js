@@ -126,3 +126,23 @@ contactForms.forEach((contactForm) => {
     }
   });
 });
+const jenisLokasi = document.getElementById("jenis_lokasi");
+const ruanganGroup = document.getElementById("ruanganGroup");
+const ruangan = document.getElementById("ruangan");
+const lokasiLuarGroup = document.getElementById("lokasiLuarGroup");
+const lokasiLuar = document.getElementById("lokasi_luar");
+
+if (jenisLokasi && ruanganGroup && ruangan && lokasiLuarGroup && lokasiLuar) {
+  jenisLokasi.addEventListener("change", () => {
+    const diDalamKampus = jenisLokasi.value === "dalam";
+    const diLuarKampus = jenisLokasi.value === "luar";
+
+    ruanganGroup.hidden = !diDalamKampus;
+    ruangan.disabled = !diDalamKampus;
+    ruangan.required = diDalamKampus;
+
+    lokasiLuarGroup.hidden = !diLuarKampus;
+    lokasiLuar.disabled = !diLuarKampus;
+    lokasiLuar.required = diLuarKampus;
+  });
+}

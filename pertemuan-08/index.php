@@ -191,7 +191,71 @@ switch ($programStudi) {
 						maxlength="100"
 						required />
 				</div>
-				</form>
+				<div class="form-group">
+					<label for="Kategori Kegiatan">Kategori Kegiatan</label><br />
+					<select class="input-form" id="kategori_kegiatan" name="kategori_kegiatan" required>
+						<option value="">-- Pilih Kategori Kegiatan --</option>
+						<option value="Akademik">Akademik</option>
+						<option value="Non-Akademik">Organisasi</option>
+						<option value="Pengabdian Masyarakat">Pengabdian Masyarakat</option>
+						<option value="Seminar">Seminar</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="tanggal_Pelaksanaan">Tanggal Pelaksanaan</label><br />
+					<input
+						class="input-form"
+						type="date"
+						id="tanggal_Pelaksanaan"
+						name="tanggal_Pelaksanaan"
+						required />
+						</div>
+				<div class="form-group">
+
+    <label for="jenis_lokasi">Lokasi Kegiatan</label><br />
+    <select class="input-form" id="jenis_lokasi" name="jenis_lokasi" required>
+        <option value="">-- Pilih Lokasi --</option>
+        <option value="dalam">Di dalam kampus</option>
+        <option value="luar">Di luar kampus</option>
+    </select>
+</div>
+
+<div class="form-group" id="ruanganGroup" hidden>
+    <label for="ruangan">Pilih Ruangan</label><br />
+    <select class="input-form" id="ruangan" name="ruangan" disabled>
+        <option value="">-- Pilih Ruangan --</option>
+        <option value="Aula">Aula</option>
+        <option value="Lab Komputer">Lab Komputer 1</option>
+		<option value="Lab Komputer 2">Lab Komputer 2</option>
+		<option value="Lab Komputer 3">Lab Komputer 3</option>
+		<option value="Lab Komputer 4">Lab Komputer 4</option>
+        <option value="Ruang Kelas">Ruang Kelas</option>
+    </select>
+</div>
+
+<div class="form-group" id="lokasiLuarGroup" hidden>
+    <label for="lokasi_luar">Nama Tempat/Lokasi</label><br />
+    <input
+        class="input-form"
+        type="text"
+        id="lokasi_luar"
+        name="lokasi_luar"
+        placeholder="Masukkan nama tempat"
+        disabled />
+</div>
+				
+				</div>
+				<div class="form-group">
+					<label for="Deskripsi_Kegiatan">Deskripsi Kegiatan</label><br />
+					<textarea
+						class="input-form"
+						id="Deskripsi_Kegiatan"
+						name="Deskripsi_Kegiatan"
+						placeholder="Tulis deskripsi kegiatan"
+						required></textarea>
+				</div>
+				<button type="submit">Kirim</button>
+			</form>
 		</section>
 
 		<section id="contact">
