@@ -185,7 +185,7 @@ switch ($programStudi) {
 				<li><a href="#home">Beranda</a></li>
 				<li><a href="#about">Tentang</a></li>
 				<li><a href="#contact">Kontak</a></li>
-				<li><a href="#rencana-kegiatan">Rencana Kegiatan Mahasiswa</a></li>
+				<li><a href="#rencana-kegiatan">Rencana Kegiatan</a></li>
 			</ul>
 		</nav>
 	</header>
