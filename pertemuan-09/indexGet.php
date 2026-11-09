@@ -1,51 +1,26 @@
 <?php
-session_start();
+//P7
+echo $_GET["nama"] . "<br>";
+echo $_GET["email"] . "<br>";
+echo $_GET["semester"] . "<br>";
+echo $_GET["tanggal"] . "<br>";
+echo $_GET["jenis_pesan"] . "<br>";
+echo $_GET["prodi"] . "<br>";
+echo $_GET["pesan"] . "<br>";
 
-// P7: Memproses data formulir dan menyimpannya ke dalam session.
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-	$nama = trim((string) ($_POST["nama"] ?? ""));
-	$email = trim((string) ($_POST["email"] ?? ""));
-	$semesterForm = trim((string) ($_POST["semester"] ?? ""));
-	$tanggal = trim((string) ($_POST["tanggal"] ?? ""));
-	$jenisPesan = trim((string) ($_POST["jenis_pesan"] ?? ""));
-	$minat = $_POST["minat"] ?? [];
-	$prodi = trim((string) ($_POST["prodi"] ?? ""));
-	$pesan = trim((string) ($_POST["pesan"] ?? ""));
-
-	// Checkbox dapat mengirimkan lebih dari satu nilai.
-	if (!is_array($minat)) {
-		$minat = [];
-	}
-
-	// Menyimpan setiap nilai formulir ke dalam session secara terpisah.
-	$_SESSION["nama"] = $nama;
-	$_SESSION["email"] = $email;
-	$_SESSION["semester"] = $semesterForm;
-	$_SESSION["tanggal"] = $tanggal;
-	$_SESSION["jenis_pesan"] = $jenisPesan;
-	$_SESSION["minat"] = $minat;
-	$_SESSION["prodi"] = $prodi;
-	$_SESSION["pesan"] = $pesan;
-
-	// PRG: mencegah pengiriman POST berulang ketika halaman dimuat ulang.
-	header("Location: index.php#contact");
-	exit;
-}
-
-// Mengamankan data sebelum ditampilkan kembali ke halaman HTML.
 // P6: PHP dasar dan pemrograman sisi peladen
 // Bagian 1: Variabel dan konstanta
-$nim = "2611500006";
-$namaMahasiswa = "Venecia Calista Steffanny";
-$programStudi = "TI";
+$nim = "0344300002";
+$namaMahasiswa = "Cantika Putih";
+$programStudi = "SI";
 $tahunAkademik = "2026/2027";
-$semester = 1;
+$semester = 4;
 $ipk = 3.75;
 $statusAktif = true;
 $catatanTambahan = null;
 
 const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
-const PROFIL_GITHUB = "dokjacia";
+const PROFIL_GITHUB = "satpamal";
 
 // Bagian 2: Operator
 $batasSemester = 8;
@@ -107,7 +82,6 @@ switch ($programStudi) {
 				<li><a href="#home">Beranda</a></li>
 				<li><a href="#about">Tentang</a></li>
 				<li><a href="#contact">Kontak</a></li>
-				<li><a href="Rencana Kegiatan Mahasiswa">Rencana Kegiatan Mahasiswa</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -117,7 +91,7 @@ switch ($programStudi) {
 			<h2>Selamat Datang</h2>
 			<p>Halo, saya <strong><?php echo $namaMahasiswa; ?></strong>. Saya sedang mempelajari matakuliah <strong><?php print NAMA_MATA_KULIAH; ?></strong> pada tahun akademik <?php echo $tahunAkademik; ?>.</p>
 
-			<img src="img/image.png" alt="Foto profil Nama Mahasiswa" />
+			<img src="img/foto-profil.jpg" alt="Foto profil Nama Mahasiswa" />
 		</section>
 
 		<section id="about">
@@ -183,7 +157,7 @@ switch ($programStudi) {
 				<a target="_blank" href="https://github.com/<?= PROFIL_GITHUB ?>">profil GitHub saya</a>.
 			</p>
 
-			<form id="contactForm" class="js-contact-form" data-validation="contact" action="index.php" method="post" novalidate>
+			<form id="contactForm" action="index.php" method="get" novalidate>
 				<div class="form-group">
 					<label for="nama">Nama Lengkap</label><br />
 
@@ -229,10 +203,10 @@ switch ($programStudi) {
 				<div class="form-group">
 					<p>Topik yang Diminati</p>
 
-					<input type="checkbox" id="minat-html" name="minat[]" value="HTML" />
+					<input type="checkbox" id="minat-html" name="minat" value="HTML" />
 					<label for="minat-html">HTML</label>
 
-					<input type="checkbox" id="minat-css" name="minat[]" value="CSS" />
+					<input type="checkbox" id="minat-css" name="minat" value="CSS" />
 					<label for="minat-css">CSS</label>
 				</div>
 
@@ -256,29 +230,12 @@ switch ($programStudi) {
 						maxlength="300"
 						placeholder="Tulis pesan Anda"
 						required></textarea>
-
 				</div>
 
 				<button type="submit">Kirim</button>
 				<button type="reset">Batal</button>
-				<p class="form-feedback" data-form-feedback aria-live="polite"></p>
+				<p id="formFeedback"></p>
 			</form>
-
-			<?php if (isset($_SESSION["nama"])): ?>
-				<article id="hasilKontak" class="submission-result" aria-live="polite">
-					<h3>Data Formulir yang Dikirim</h3>
-					<p><strong>Nama Lengkap:</strong> <?= htmlspecialchars($_SESSION["nama"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Email:</strong> <?= htmlspecialchars($_SESSION["email"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Semester:</strong> <?= htmlspecialchars($_SESSION["semester"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Tanggal Kunjungan:</strong> <?= htmlspecialchars($_SESSION["tanggal"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Jenis Pesan:</strong> <?= htmlspecialchars($_SESSION["jenis_pesan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Topik yang Diminati:</strong>
-						<?= htmlspecialchars(implode(", ", $_SESSION["minat"] ?? []), ENT_QUOTES, "UTF-8") ?>
-					</p>
-					<p><strong>Program Studi:</strong> <?= htmlspecialchars($_SESSION["prodi"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Pesan:</strong> <?= nl2br(htmlspecialchars($_SESSION["pesan"] ?? "", ENT_QUOTES, "UTF-8")) ?></p>
-				</article>
-			<?php endif; ?>
 		</section>
 	</main>
 
